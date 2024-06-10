@@ -1,3 +1,6 @@
+import { useNewAccount } from "@/features/accounts/hooks/use-new-accounts"
+import AccountForm from "@/features/accounts/components/account-form"
+
 import {
     Sheet,
     SheetContent,
@@ -7,10 +10,12 @@ import {
 } from "@/components/ui/sheet"
 
 export default function NewAccountSheet() {
+    const { isOpen, onClose } = useNewAccount()
+
     return (
-        <Sheet open>
-            <SheetContent className="space-y-4">
-                <SheetHeader>
+        <Sheet open={isOpen} onOpenChange={onClose}>
+            <SheetContent>
+                <SheetHeader className="my-20">
                     <SheetTitle>
                         New Account
                     </SheetTitle>
@@ -18,6 +23,7 @@ export default function NewAccountSheet() {
                         Create a new account to track the finances.
                     </SheetDescription>
                 </SheetHeader>
+                <AccountForm onSubmit={() => { }} disabled={false} />
             </SheetContent>
         </Sheet>
     )
