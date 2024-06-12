@@ -2,7 +2,7 @@ import Image from "next/image"
 import { SignIn } from "@clerk/nextjs"
 import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs"
 import { Loader2 } from "lucide-react"
-import logo from "../../../../public/logo.svg"
+import logo from "@/public/logo.svg"
 
 export default function SignInPage() {
     return (
