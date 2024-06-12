@@ -1,3 +1,5 @@
+import { insertAccountSchema } from "@/db/schema"
+import { z } from "zod"
 import { useNewAccount } from "@/features/accounts/hooks/use-new-accounts"
 import AccountForm from "@/features/accounts/components/account-form"
 
@@ -12,6 +14,16 @@ import {
 export default function NewAccountSheet() {
     const { isOpen, onClose } = useNewAccount()
 
+    const formSchema = insertAccountSchema.pick({
+        name: true
+    })
+
+    type FormValues = z.input<typeof formSchema>
+
+    const onSubmit = (values: FormValues) => {
+        console.log({ values })
+    }
+
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
             <SheetContent>
@@ -23,7 +35,7 @@ export default function NewAccountSheet() {
                         Create a new account to track the finances.
                     </SheetDescription>
                 </SheetHeader>
-                <AccountForm onSubmit={() => { }} disabled={false} />
+                <AccountForm onSubmit={onSubmit} disabled={false} />
             </SheetContent>
         </Sheet>
     )
